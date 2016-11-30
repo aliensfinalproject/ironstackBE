@@ -29,6 +29,24 @@ class UserController {
 
 	}
 
+	* update(request,response){
+		let user = request.authUser
+		let userID = request.params('id')
+
+		if(user.admin==true){
+			let newAdmin = yield User.findBy(userID,'id')
+			newAdmin.admin=true;
+			yield newAdmin.save()
+			response.status(200).json(newAdmin)
+		}else{
+			response.status(401).send("Only admins are allowed to make other users admins")
+		}
+	}
+	* list(request,response){
+		let listUsers = yield User.all()
+		response.status(200).json(listUsers)
+	}
+
 
 
 

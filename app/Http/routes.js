@@ -21,5 +21,5 @@ Route.on('/').render('welcome')
 
 Route.post('/register','UserController.signUp')
 Route.post('/login','UserController.login')
-Route.get('/usermgnt','UserManagementController.list').middleware('auth')
-Route.post('/usermgnt/:id','UserManagementController.update').middleware('auth')
+Route.get('/usermgmt','UserController.list').middleware('auth')
+Route.post('/usermgmt/:id','UserController.update').middleware('auth')
