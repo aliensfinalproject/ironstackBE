@@ -19,6 +19,7 @@ class UserController {
 	* login(request,response){
 		let data = request.only('username','password')
 		let user = yield User.findBy('username',data.username)
+		console.log(user)
 		try{
 			const token = yield request.auth.attempt(data.username,data.password)
 			user.access_token = token
