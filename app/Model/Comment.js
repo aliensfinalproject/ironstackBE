@@ -2,16 +2,16 @@
 
 const Lucid = use('Lucid')
 
-class Post extends Lucid {
+class Comment extends Lucid {
 
   user () {
     return this.belongsTo('App/Model/User')
   }
 
-  comment () {
-    return this.hasMany('App/Model/Comment')
+  post () {
+    return this.belongsTo('App/Model/Post')
   }
 
 }
 
-module.exports = Post
+module.exports = Comment
