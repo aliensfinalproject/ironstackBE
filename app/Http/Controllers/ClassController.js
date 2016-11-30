@@ -22,10 +22,13 @@ class ClassController {
 	* editClass(request,response){
 		let user = request.authUser
 		let classID = request.params('classId')
+		console.log(classID);
 		let data = request.all()
 
 		if(user.admin==true){
 			let editClass = yield Classe.findBy(classID,'id')
+			console.log('id')
+			console.log(editClass)
 			editClass.fill(data)
 			yield editClass.save()
 			response.status(201).json(editClass)
