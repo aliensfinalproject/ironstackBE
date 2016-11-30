@@ -23,3 +23,8 @@ Route.post('/register','UserController.signUp')
 Route.post('/login','UserController.login')
 Route.get('/usermgmt','UserController.list').middleware('auth')
 Route.post('/usermgmt/:id','UserController.update').middleware('auth')
+
+Route.get('/class')
+Route.post('/class/create')
+Route.put('/class/update')
+Route.delete('/class/delete')
