@@ -28,3 +28,8 @@ Route.get('/class','ClassController.read').middleware('auth')
 Route.post('/class/create','ClassController.addClass').middleware('auth')
 Route.put('/class/update/:classId','ClassController.editClass').middleware('auth')
 Route.delete('/class/delete/:classId','ClassController.deleteClass').middleware('auth')
+
+Route.post('/user/:id/post', 'PostController.create').middleware('auth')
+Route.get('/user/:id/post/:post_id', 'PostController.show').middleware('auth')
+Route.put('/user/:id/post/:post_id', 'PostController.update').middleware('auth')
+Route.delete('/user/:id/post/:post_id', 'PostController.delete').middleware('auth')
