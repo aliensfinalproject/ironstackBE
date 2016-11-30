@@ -23,7 +23,7 @@ class UserController {
 		try{
 			const token = yield request.auth.attempt(data.username,data.password)
 			user.access_token = token
-			response.status(200).send(user)
+			response.status(200).json(user)
 		} catch(e){
 			response.status(401).unauthorized({error: e.message})
 		}
