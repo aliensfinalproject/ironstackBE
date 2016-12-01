@@ -18,6 +18,18 @@ class ClassController {
 			response.status(403).send("Only admins are allowed to create classes")
 		}
 	}
+	* singleClass(request,response){
+		let user = request.authUser
+		let classID = request.params('classId')
+		if(user.admin==true){
+			let reqdClass = yield Classe.findBy('id',classID)
+			response.status(200).json(reqdClass)
+		}else {
+			response.status(403).send("Only admins can access class")
+		}
+		
+
+	}
 
 	* editClass(request,response){
 		let user = request.authUser
@@ -26,7 +38,7 @@ class ClassController {
 		let data = request.all()
 
 		if(user.admin==true){
-			let editClass = yield Classe.findBy(classID,'id')
+			let editClass = yield Classe.findBy('id',classID)
 			console.log('id')
 			console.log(editClass)
 			editClass.fill(data)
