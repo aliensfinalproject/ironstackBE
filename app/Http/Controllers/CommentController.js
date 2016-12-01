@@ -6,11 +6,15 @@ class CommentController {
   * create (request, response) {
     let user = request.authUser
     let postId = request.param('id')
-		let data = request.only('content')
-		data.post_id = postId;
-		let comments = yield Comment.create(data)
+    let data = request.only('content')
+    data.user_id = user.id
 
-		response.status(201).json(comments)
+    let post = yield Post.findBy('id', postId)
+    data.post_id = post.id
+    if (post) {
+      let comments = yield Comment.create(data)
+      response.status(201).json(comments)
+    }
   }
 
   * index (request, response) {
@@ -19,21 +23,32 @@ class CommentController {
   }
 
   * update (request, response) {
+
+    let user = request.authUser
     let commentId = request.param('id')
-    let data = request.only ("content")
     let comment = yield Comment.findBy("id", commentId)
-    data.user_id = request.authUser.id
-    comment.fill(data)
-    yield comment.save()
-    response.status(201).json(comment)
+    let data = request.only ("content")
+    if (comment.user_id === request.authUser.id) {
+      comment.fill(data)
+      yield comment.save()
+      response.status(201).json(comment)
+    } else {
+      response.json({text: "User not authorized to update comment."})
+    }
+
   }
 
   * delete (request, response) {
+    let user = request.authUser
     let commentId = request.param('id')
     let comment = yield Comment.findBy('id', commentId)
-    yield comment.del()
+    if (comment.user_id === request.authUser.id) {
+      yield comment.delete()
+      response.json({text: "comment has been deleted"})
+    } else {
+      response.json({text: "User not authorized to delete comment."})
+    }
 
-    response.json({text: "comment has been deleted"})
   }
 
 }

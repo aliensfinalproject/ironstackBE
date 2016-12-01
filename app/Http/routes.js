@@ -33,6 +33,7 @@ Route.delete('/class/delete/:id','ClassController.deleteClass').middleware('auth
 Route.get('/class/:id','ClassController.singleClass').middleware('auth')
 
 Route.post('/post', 'PostController.create').middleware('auth')
+Route.get('/posts', 'PostController.index').middleware('auth')
 Route.get('/post/:post_id', 'PostController.show').middleware('auth')
 Route.put('/post/:post_id', 'PostController.update').middleware('auth')
 Route.delete('/post/:post_id', 'PostController.delete').middleware('auth')
