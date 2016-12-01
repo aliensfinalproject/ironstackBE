@@ -1,16 +1,20 @@
 'use strict'
 const Comment = use('App/Model/Comment')
+const Post = use('App/Model/Post')
 
 class CommentController {
 
   * create (request, response) {
     let user = request.authUser
     let postId = request.param('id')
-		let data = request.only('content')
-		data.post_id = postId;
-		let comments = yield Comment.create(data)
-
-		response.status(201).json(comments)
+    let data = request.only('content')
+    let post = yield Post.findBy('id')
+    if (post) {
+      let comments = yield Comment.create(data)
+      response.status(201).json(comments)
+    } else {
+      response.status(404).json({text: 'post not found'})
+    }
   }
 
   * index (request, response) {
