@@ -4,6 +4,12 @@ const Hash = use('Hash')
 
 
 class UserController {
+	* index(request,response){
+		let allUsers = yield User.all()
+		response.status(200).json(allUsers)
+
+	}
+
 	* signUp(request,response){
 		let data = request.all()
 		data.password = yield Hash.make(data.password)

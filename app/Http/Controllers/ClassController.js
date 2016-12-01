@@ -20,26 +20,26 @@ class ClassController {
 	}
 	* singleClass(request,response){
 		let user = request.authUser
-		let classID = request.params('classId')
+		let classID = request.params('id')
 		if(user.admin==true){
-			let reqdClass = yield Classe.findBy('id',classID)
+			let reqdClass = yield Classe.findBy(classID,'id')
+			console.log(reqdClass)
+
 			response.status(200).json(reqdClass)
 		}else {
 			response.status(403).send("Only admins can access class")
-		}
-		
+		}		
 
 	}
 
 	* editClass(request,response){
 		let user = request.authUser
-		let classID = request.params('classId')
+		let classID = request.params('id')
 		console.log(classID);
 		let data = request.all()
 
 		if(user.admin==true){
-			let editClass = yield Classe.findBy('id',classID)
-			console.log('id')
+			let editClass = yield Classe.findBy(classID,'id')
 			console.log(editClass)
 			editClass.fill(data)
 			yield editClass.save()
@@ -52,11 +52,12 @@ class ClassController {
 
 	* deleteClass(request,response){
 		let user = request.authUser
-		let classID = request.params('classId')
+		let classID = request.params('id')
 		let data = request.all()
 		if(user.admin==true){
-			let removeClass = yield Classe.findBy(classID,'id').delete()
-			response.status(201).json(editClass)
+			let removeClass = yield Classe.findBy(classID,'id')
+			yield removeClass.delete()
+			response.status(201).send('class deleted')
 		} else {
 			response.status(403).send("Only admins are allowed to delete class")
 		}

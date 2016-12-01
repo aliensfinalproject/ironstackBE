@@ -19,6 +19,7 @@ const Route = use('Route')
 
 Route.on('/').render('welcome')
 
+Route.get('/users','UserController.index').middleware('auth')
 Route.post('/register','UserController.signUp')
 Route.post('/login','UserController.login')
 Route.get('/usermgmt','UserController.list').middleware('auth')
@@ -26,9 +27,9 @@ Route.post('/usermgmt/:id','UserController.update').middleware('auth')
 
 Route.get('/class','ClassController.read').middleware('auth')
 Route.post('/class/create','ClassController.addClass').middleware('auth')
-Route.put('/class/update/:classId','ClassController.editClass').middleware('auth')
-Route.delete('/class/delete/:classId','ClassController.deleteClass').middleware('auth')
-Route.get('/class/:classId','ClassController.singleClass').middleware('auth')
+Route.put('/class/update/:id','ClassController.editClass').middleware('auth')
+Route.delete('/class/delete/:id','ClassController.deleteClass').middleware('auth')
+Route.get('/class/:id','ClassController.singleClass').middleware('auth')
 
 Route.post('/post', 'PostController.create').middleware('auth')
 Route.get('/post/:post_id', 'PostController.show').middleware('auth')
