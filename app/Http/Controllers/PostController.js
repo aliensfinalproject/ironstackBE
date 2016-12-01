@@ -8,9 +8,11 @@ class PostController {
 
    * create (request, response) {
        let user = request.authUser
+       let classID = request.params('id')
        let data = request.only("title", "content")
        data.user_id = user.id
-       data.class_id = user.class_id
+       //data.class_id = user.class_id
+       data.class_id = classID  // temp until user is tied to a class
 
        let post = yield Post.create(data)
 
@@ -19,8 +21,9 @@ class PostController {
    }
 
    * index (request, response) {
-   let posts = yield Post.all()
-   response.status(200).json(posts)
+       let classID = request.params('id')
+       let posts = yield Post.findBy('class_id',classID)
+       response.status(200).json(posts)
  }
 
    * show (request, response){
