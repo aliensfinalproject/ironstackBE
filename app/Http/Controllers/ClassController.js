@@ -15,7 +15,7 @@ class ClassController {
 			let newClass = yield Classe.create(data)
 			response.status(201).json(newClass)
 		} else {
-			response.status(401).send("Only admins are allowed to make other users admins")
+			response.status(403).send("Only admins are allowed to create classes")
 		}
 	}
 
@@ -33,7 +33,7 @@ class ClassController {
 			yield editClass.save()
 			response.status(201).json(editClass)
 		} else {
-			response.status(401).send("Only admins are allowed to make other users admins")
+			response.status(403).send("Only admins are allowed to edit class")
 		}
 
 	}
@@ -46,7 +46,7 @@ class ClassController {
 			let removeClass = yield Classe.findBy(classID,'id').delete()
 			response.status(201).json(editClass)
 		} else {
-			response.status(401).send("Only admins are allowed to make other users admins")
+			response.status(403).send("Only admins are allowed to delete class")
 		}
 
 

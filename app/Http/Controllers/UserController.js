@@ -40,7 +40,7 @@ class UserController {
 			yield newAdmin.save()
 			response.status(200).json(newAdmin)
 		}else{
-			response.status(401).send("Only admins are allowed to make other users admins")
+			response.status(403).send("Only admins are allowed to make other users admins")
 		}
 	}
 	* list(request,response){
