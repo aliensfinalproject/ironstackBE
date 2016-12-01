@@ -57,7 +57,7 @@ class ClassController {
 		if(user.admin==true){
 			let removeClass = yield Classe.findBy(classID,'id')
 			yield removeClass.delete()
-			response.status(201).send('class deleted')
+			response.status(201)
 		} else {
 			response.status(403).send("Only admins are allowed to delete class")
 		}

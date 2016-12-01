@@ -4,9 +4,25 @@ const Hash = use('Hash')
 
 
 class UserController {
-	* index(request,response){
-		let allUsers = yield User.all()
-		response.status(200).json(allUsers)
+	
+	* list(request,response){
+		let listUsers = yield User.all()
+		response.status(200).json(listUsers)
+	}
+
+
+	* deleteUser(request,response){
+		let user = request.authUser
+		let userID = request.params('id')
+		let data = request.all()
+		if(user.admin==true){
+			let removeUser = yield User.findBy(userID,'id')
+			yield removeUser.delete()
+			response.status(201)
+		} else {
+			response.status(403).send("Only admins are allowed to delete class")
+		}
+
 
 	}
 
