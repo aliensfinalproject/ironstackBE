@@ -22,7 +22,7 @@ class PostController {
 
    * index (request, response) {
        let classID = request.param('id')
-       let posts = yield Post.findBy('class_id',classID)
+       let posts = yield Post.query().where('class_id',classID).fetch();
        response.status(200).json(posts)
  }
 
