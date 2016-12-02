@@ -26,6 +26,12 @@ class PostController {
        response.status(200).json(posts)
  }
 
+  * read(request,response){
+    let user = request.authUser
+    let posts = yield Post.query().where('user_id',user.id).fetch();
+    response.status(200).json(posts)
+  }
+
    * show (request, response){
        let postId = request.param("post_id")
        let post = yield Post.findBy("id", postId)
