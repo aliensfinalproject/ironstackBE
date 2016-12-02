@@ -5,8 +5,10 @@ class AssignmentController {
 
   * create (request, response) {
     let user = request.authUser
+    // let classId = user.class_id
     if (user.admin) {
       let data = request.all()
+      // data.class_id = classId
       let assignment = yield Assignment.create(data)
       response.status(201).json(assignment)
     } else {
