@@ -19,6 +19,9 @@ class User extends Lucid {
 	comments () {
 		return this.hasMany('App/Model/Comment')
 	}
+	class(){
+		return this.hasOne('App/Model/Classe')
+	}
 
 	
 }
