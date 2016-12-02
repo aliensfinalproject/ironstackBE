@@ -20,7 +20,7 @@ class ClassController {
 	}
 	* singleClass(request,response){
 		let user = request.authUser
-		let classID = request.params('id')
+		let classID = request.param('id')
 		if(user.admin==true){
 			let reqdClass = yield Classe.findBy(classID,'id')
 			console.log(reqdClass)
@@ -34,7 +34,7 @@ class ClassController {
 
 	* editClass(request,response){
 		let user = request.authUser
-		let classID = request.params('id')
+		let classID = request.param('id')
 		console.log(classID);
 		let data = request.all()
 
@@ -52,7 +52,7 @@ class ClassController {
 
 	* deleteClass(request,response){
 		let user = request.authUser
-		let classID = request.params('id')
+		let classID = request.param('id')
 		let data = request.all()
 		if(user.admin==true){
 			let removeClass = yield Classe.findBy(classID,'id')

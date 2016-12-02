@@ -21,7 +21,7 @@ class PostController {
    }
 
    * index (request, response) {
-       let classID = request.params('id')
+       let classID = request.param('id')
        let posts = yield Post.findBy('class_id',classID)
        response.status(200).json(posts)
  }
