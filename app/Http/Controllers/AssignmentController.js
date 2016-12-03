@@ -68,6 +68,17 @@ class AssignmentController {
     }
   }
 
+  * test (request, response) {
+    let user = request.authUser
+    let assignmentId = request.param('title', 'description')
+    let assignments = yield Assignment.query().where('title', data.title)
+    if (assignments) {
+      assignments.description = data.description
+      response.json(assignments)
+    }
+
+  }
+
 }
 
 module.exports = AssignmentController
