@@ -11,6 +11,10 @@ class Classe extends Lucid {
 		return this.hasOne('App/Model/Classe')
 	}
 
+	assignments(){
+		return this.hasMany('App/Model/Assignment')
+	}
+
 }
 
 module.exports = Classe
