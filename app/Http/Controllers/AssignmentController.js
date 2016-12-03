@@ -1,15 +1,14 @@
 'use strict'
-
-const Assignment = use ("App/Model/Assignment")
+const Assignment = use("App/Model/Assignment")
 
 class AssignmentController {
 
   * create (request, response) {
    let user = request.authUser
-   // let classId = user.class_id
+   let classId = user.class_id
    if (user.admin) {
      let data = request.all()
-     // data.class_id = classId
+     data.class_id = classId
      let assignment = yield Assignment.create(data)
      response.status(201).json(assignment)
    } else {
@@ -69,16 +68,16 @@ class AssignmentController {
    }
  }
 
- * test (request, response) {
-   let user = request.authUser
-   let assignmentId = request.param('title', 'description')
-   let assignments = yield Assignment.query().where('title', data.title)
-   if (assignments) {
-     assignments.description = data.description
-     response.json(assignments)
-   }
-
- }
+ // * test (request, response) {
+ //   let user = request.authUser
+ //   let assignmentId = request.param('title', 'description')
+ //   let assignments = yield Assignment.query().where('title', data.title)
+ //   if (assignments) {
+ //     assignments.description = data.description
+ //     response.json(assignments)
+ //   }
+ //
+ // }
 
 }
 
