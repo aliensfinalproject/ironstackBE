@@ -9,7 +9,7 @@ class PostController {
    * create (request, response) {
        let user = request.authUser
        let classID = request.param('id')
-       let data = request.only("title", "content",'category')
+       let data = request.only("title", "content","category")
        data.user_id = user.id
        //data.class_id = user.class_id
        data.class_id = classID  // temp until user is tied to a class
