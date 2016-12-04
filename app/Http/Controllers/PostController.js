@@ -60,8 +60,10 @@ class PostController {
          let user = request.authUser
          let post = yield Post.findBy('id', postId)
          let comments = yield Comment.query().where('post_id',postId).fetch();
-
+         console.log(comments)
+         console.log(post)
           if (post.user_id === user.id){
+            console.log(comments.length)
             for(let i=0; i<comments.length;i++){
               console.log(comments[i])
             yield comments[i].delete()
