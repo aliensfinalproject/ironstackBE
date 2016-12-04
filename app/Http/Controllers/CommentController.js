@@ -5,7 +5,7 @@ class CommentController {
 
   * create (request, response) {
     let user = request.authUser
-    let postId = request.param('id')
+    let postId = request.param('post_id')
     let data = request.only('content')
     data.user_id = user.id
 
