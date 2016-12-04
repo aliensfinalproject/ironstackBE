@@ -57,19 +57,19 @@ class PostController {
    * delete (request, response){
          let postId = request.param("post_id")
          let user = request.authUser
-         const post_list = yield Post.query().table('posts')
-         .where('id', postId)
+         /*const post_list = yield Post.query().table('posts')
+         .where('id', postId)*/
 
-         for (var i=0; i<post_list.length; i++){
+        /* for (var i=0; i<post_list.length; i++){
              console.log(post_list[i])
              let deletedPost = yield Post.find(post_list[i].id)
-         }
+         }*/
 
          let post = yield Post.findBy('id', postId)
-         post_list.user_id = user.id
-         user.id = post.id
+         //post_list.user_id = user.id
+         //user.id = post.id
 
-           if (post.user_id === request.authUser.id) {
+           if (post.user_id === user.id) {
              yield post.delete()
              response.json({text: "Post has been deleted."})
                 }else {
@@ -77,12 +77,12 @@ class PostController {
                 }
 
 
-         if (!post){
+        /* if (!post){
              response.status(404).json({text: "Post cannot be found."})
          } else {
                yield post.delete()
                response.status(201).json({text: "Post has been deleted.", post:post})
-         }
+         }*/
 
    }
 
