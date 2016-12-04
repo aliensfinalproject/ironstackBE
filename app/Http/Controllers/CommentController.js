@@ -19,7 +19,7 @@ class CommentController {
 
   * index (request, response) {
     let postId = request.param('post_id')
-    let comments = yield Comment.query().where('post_id', postId).fetch()
+    let comments = yield Comment.query().where('post_id', postId).orderBy('id',desc).fetch()
 		response.status(200).json(comments)
   }
 
