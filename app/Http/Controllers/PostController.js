@@ -3,6 +3,7 @@
 const Post = use('App/Model/Post')
 
 const Classe = use('App/Model/Classe')
+const Comment = use('App/Model/Comment')
 
 class PostController {
 
@@ -57,34 +58,19 @@ class PostController {
    * delete (request, response){
          let postId = request.param("post_id")
          let user = request.authUser
-         /*const post_list = yield Post.query().table('posts')
-         .where('id', postId)*/
-
-        /* for (var i=0; i<post_list.length; i++){
-             console.log(post_list[i])
-             let deletedPost = yield Post.find(post_list[i].id)
-         }*/
-
          let post = yield Post.findBy('id', postId)
-         //post_list.user_id = user.id
-         //user.id = post.id
-
-           if (post.user_id === user.id) {
-             yield post.delete()
-             response.json({text: "Post has been deleted."})
-                }else {
-                    response.json({text: "User not authorized to delete post."})
-                }
-
-
-        /* if (!post){
-             response.status(404).json({text: "Post cannot be found."})
+         let comments = yield Comment.query().where('post_id',postId).fetch();
+          if (post.user_id === user.id){
+            for(let i=0; i<comments.length;i++){
+            yield comments[i].delete()
+          }
+           yield post.delete()
+           response.status(200).json({text: "Post has been deleted."})
          } else {
-               yield post.delete()
-               response.status(201).json({text: "Post has been deleted.", post:post})
-         }*/
-
-   }
+            response.status(401).json({text: "User not authorized to delete post."})
+                }
+  
+    }
 
 
 }
