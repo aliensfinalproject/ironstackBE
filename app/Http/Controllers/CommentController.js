@@ -10,7 +10,7 @@ class CommentController {
     data.user_id = user.id
 
    // let post = yield Post.findBy('id', postId)
-    data.post_id = post.id
+    data.post_id = postId
     //if (post) {
       let comments = yield Comment.create(data)
       response.status(201).json(comments)
