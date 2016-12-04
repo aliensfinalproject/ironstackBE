@@ -63,8 +63,8 @@ class PostController {
          console.log(comments)
          console.log(post)
           if (post.user_id === user.id){
-            console.log(comments.length)
-            for(let i=0; i<comments.length;i++){
+            console.log(comments.size())
+            for(let i=0; i<comments.size();i++){
               console.log(comments[i])
             yield comments[i].delete()
           }
