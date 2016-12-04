@@ -22,13 +22,13 @@ class PostController {
 
    * index (request, response) {
        let classID = request.param('id')
-       let posts = yield Post.query().where('class_id',classID).orderBy('id','desc')fetch();
+       let posts = yield Post.query().where('class_id',classID).orderBy('id','desc').fetch();
        response.status(200).json(posts)
  }
 
   * read(request,response){
     let user = request.authUser
-    let posts = yield Post.query().where('user_id',user.id).orderBy('id','desc')fetch();
+    let posts = yield Post.query().where('user_id',user.id).orderBy('id','desc').fetch();
     response.status(200).json(posts)
   }
 
