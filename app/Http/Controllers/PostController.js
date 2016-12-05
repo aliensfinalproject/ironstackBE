@@ -1,7 +1,5 @@
 'use strict'
-
 const Post = use('App/Model/Post')
-
 const Classe = use('App/Model/Classe')
 const Comment = use('App/Model/Comment')
 
@@ -9,15 +7,14 @@ class PostController {
 
    * create (request, response) {
        let user = request.authUser
-       let classID = request.param('id')
+       let assignmentId = request.param('id')
        let data = request.only("title", "content","category")
        data.user_id = user.id
-       //data.class_id = user.class_id
-       data.class_id = classID  // temp until user is tied to a class
+       data.class_id = user.class_id
+       data.assignment_id = assignmentId
 
        let post = yield Post.create(data)
 
-       post.save()
        response.status(201).json(post)
    }
 

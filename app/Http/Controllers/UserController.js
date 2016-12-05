@@ -4,7 +4,7 @@ const Hash = use('Hash')
 
 
 class UserController {
-	
+
 	* list(request,response){
 		let listUsers = yield User.all()
 		response.status(200).json(listUsers)
@@ -68,6 +68,18 @@ class UserController {
 	* list(request,response){
 		let listUsers = yield User.all()
 		response.status(200).json(listUsers)
+	}
+
+	* updateClassId (request, response) {
+		let user = request.authUser
+		let data = request.only('class_id')
+		user.class_id = data.class_id
+		if (user) {
+			yield user.save()
+			response.status(200).json(user)
+		} else {
+			response.json({text: 'Class does not exist'})
+		}
 	}
 
 
