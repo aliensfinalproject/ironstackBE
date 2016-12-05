@@ -1,11 +1,12 @@
 'use strict'
 const User = use("App/Model/User")
+const User = use("App/Model/Classe")
 const Hash = use('Hash')
 
 
 class UserController {
 
-	* list(request,response){
+	* userlist(request,response){
 		let listUsers = yield User.all()
 		response.status(200).json(listUsers)
 	}
@@ -27,7 +28,7 @@ class UserController {
 	}
 
 	* signUp(request,response){
-		let data = request.all()
+		let data = request.only('firstName','lastName','username','email','password')
 		data.password = yield Hash.make(data.password)
 		try {
 			let user = yield User.create(data)
@@ -72,15 +73,15 @@ class UserController {
 
 	* updateClassId (request, response) {
 		let user = request.authUser
-		let data = request.only('class_id')
-		user.class_id = data.class_id
-		if (user) {
-			yield user.save()
-			response.status(200).json(user)
-		} else {
-			response.json({text: 'Class does not exist'})
-		}
+		let data = request.only('className','instructor','campus','startDate')
+		let reqdclass = yield Classe.query().where('className',data.className).andWhere('instructor',data.instructor)
+		user.class_id = reqdclass.id
+		yield user.save()
+		response.status(203).json(user)
+		
 	}
+
+
 
 
 
