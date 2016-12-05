@@ -77,7 +77,7 @@ class UserController {
 		console.log('data is:',data)
 		let reqdclass = yield Classe.query().where('className',data.className).andWhere('instructor',data.instructor)
 		console.log('class is:',reqdclass)
-		user.fill({ class_id: reqdclass.id})
+		user.fill({ class_id: reqdclass[0].id})
 		console.log('user is: ', user)
 
 		yield user.save()
