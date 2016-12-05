@@ -1,6 +1,6 @@
 'use strict'
 const User = use("App/Model/User")
-const User = use("App/Model/Classe")
+const Classe = use("App/Model/Classe")
 const Hash = use('Hash')
 
 
