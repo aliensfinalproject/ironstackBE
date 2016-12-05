@@ -66,7 +66,7 @@ class PostController {
             console.log(comments.size())
             comments.forEach(function(comment) {
               console.log(comment)
-              comment.delete()
+              yield comment.delete()
             })
             //for(let i=0; i<comments.size();i++){
             //  console.log(comments[i])
