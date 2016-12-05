@@ -64,10 +64,14 @@ class PostController {
          console.log(post)
           if (post.user_id === user.id){
             console.log(comments.size())
-            for(let i=0; i<comments.size();i++){
-              console.log(comments[i])
-            yield comments[i].delete()
-          }
+            comments.forEach(function(comment) {
+              console.log(comment)
+              comment.delete()
+            })
+            //for(let i=0; i<comments.size();i++){
+            //  console.log(comments[i])
+            //yield comments[i].delete()
+          //}
            yield post.delete()
            response.status(200).json({text: "Post has been deleted."})
          } else {
