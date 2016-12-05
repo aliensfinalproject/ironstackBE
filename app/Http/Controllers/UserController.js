@@ -74,14 +74,10 @@ class UserController {
 	* updateClassId (request, response) {
 		let user = request.authUser
 		let data = request.only('className','instructor','campus','startDate')
-		console.log('data is:',data)
 		let reqdclass = yield Classe.query().where('className',data.className).andWhere('instructor',data.instructor)
-		console.log('class is:',reqdclass)
 		user.fill({ class_id: reqdclass[0].id})
-		console.log('user is: ', user)
-
 		yield user.save()
-		response.status(203).json(user)
+		response.status(202).json(user)
 		
 	}
 
