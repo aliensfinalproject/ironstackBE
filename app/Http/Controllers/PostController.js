@@ -59,20 +59,16 @@ class PostController {
          let postId = request.param("post_id")
          let user = request.authUser
          let post = yield Post.findBy('id', postId)
-         let comments = yield Comment.query().where('post_id',postId).fetch();
+         let commentsWrapper = yield Comment.query().where('post_id',postId).fetch();
+         let comments = commentsWrapper.value()
          console.log(comments)
          console.log(post)
           if (post.user_id === user.id){
-            console.log(comments.size())
-            comments.forEach(function(comment) {
-              let foundComment = yield Comment.findBy("id", comment.id)
-              console.log(foundComment)
-              yield foundComment.delete()
-            })
-            //for(let i=0; i<comments.size();i++){
-            //  console.log(comments[i])
-            //yield comments[i].delete()
-          //}
+            console.log(comments.length)
+            for(let i=0; i<comments.length;i++){
+              console.log(comments[i])
+            yield comments[i].delete()
+          }
            yield post.delete()
            response.status(200).json({text: "Post has been deleted."})
          } else {
