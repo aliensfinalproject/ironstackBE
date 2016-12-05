@@ -41,9 +41,9 @@ class CommentController {
 
   * delete (request, response) {
     let user = request.authUser
-    let commentId = request.param('id')
+    let commentId = request.param('comment_id')
     let comment = yield Comment.findBy('id', commentId)
-    if (comment.user_id === request.authUser.id) {
+    if (comment.user_id === user.id) {
       yield comment.delete()
       response.json({text: "comment has been deleted"})
     } else {
