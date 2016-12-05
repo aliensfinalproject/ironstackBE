@@ -65,8 +65,9 @@ class PostController {
           if (post.user_id === user.id){
             console.log(comments.size())
             comments.forEach(function(comment) {
-              console.log(comment)
-              yield comment.delete()
+              let foundComment = yield Comment.findBy("id", comment.id)
+              console.log(foundComment)
+              yield foundComment.delete()
             })
             //for(let i=0; i<comments.size();i++){
             //  console.log(comments[i])
