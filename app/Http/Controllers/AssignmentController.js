@@ -18,7 +18,7 @@ class AssignmentController {
  }
 
  * index (request, response) {
-   let assignments = yield Assignment.query().where('enabled', 1).fetch()
+   let assignments = yield Assignment.query().where('enabled', true).fetch()
    if (assignments) {
      response.status(200).json(assignments)
    } else {
