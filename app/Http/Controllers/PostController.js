@@ -58,7 +58,7 @@ class PostController {
          let post = yield Post.findBy('id', postId)
          let commentsWrapper = yield Comment.query().where('post_id',postId).fetch();
          let comments = commentsWrapper.value()
-          if (post.user_id === user.id){
+          if (post.user_id === user.id || user.admin == true){
             for(let i=0; i<comments.length;i++){
             yield comments[i].delete()
           }
