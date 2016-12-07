@@ -17,7 +17,7 @@ class UserController {
 		let userID = request.param('id')
 		let data = request.all()
 		if(user.admin==true){
-			let removeUser = yield User.findBy(userID,'id')
+			let removeUser = yield User.findBy('id',userID)
 			yield removeUser.delete()
 			response.status(201)
 		} else {
