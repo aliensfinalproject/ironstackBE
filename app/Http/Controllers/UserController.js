@@ -31,14 +31,15 @@ class UserController {
 					//yield usercomments[j].delete()
 				}
 				//yield userposts.delete()
+				response.status(201)
 			}
 			//yield reqdUser.delete()
 
 			
-			response.status(201)
-		} else {
+			
+		/*} else {
 			response.status(403).send("Only admins are allowed to delete class")
-		}
+		}*/
 
 
 	}
