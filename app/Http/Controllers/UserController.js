@@ -19,6 +19,8 @@ class UserController {
 		if(user.admin==true){
 			let reqdUser = yield User.findBy('id',userID)
 			let post = yield Post.query.where('user_id',userID)
+			console.log(value,post.id)
+			//let commentsWrapper = yield Comment.query().where('post_id',post.id).fetch();
 
 			yield removeUser.delete()
 			response.status(201)
