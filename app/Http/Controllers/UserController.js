@@ -20,8 +20,8 @@ class UserController {
 		if(user.admin==true){
 			let reqdUser = yield User.findBy('id',userID)
 			let posts = yield Post.query().where('user_id',userID)
-			console.log(user,reqdUser)
-			console.log(post,posts)
+			console.log('The reqd user is :'reqdUser)
+			console.log('Users posts are:'posts)
 			//yield reqdUser.delete()
 			
 			response.status(201)
