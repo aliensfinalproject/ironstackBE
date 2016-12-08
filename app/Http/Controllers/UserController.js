@@ -24,7 +24,7 @@ class UserController {
 			let userposts = userpostswrapper.value()
 			console.log("the posts are: ", userposts)
 			for (let i =0; i<userposts.length;i++){
-				let usercommentswrapper = yield Comment.query().where('post_id',userposts.id).fetch()
+				let usercommentswrapper = yield Comment.query().where('post_id',userposts[i].original.id).fetch()
 				let usercomments = userpostswrapper.value()
 				for(let j=0; j<usercomments.length;j++){
 					yield usercomments[j].delete()
