@@ -22,25 +22,19 @@ class UserController {
 			let reqdUser = yield User.findBy('id',userID)
 			let userpostswrapper = yield Post.query().where('user_id',userID).fetch()
 			let userposts = userpostswrapper.value()
-			let usercommentswrapper = yield Comment.query().where('user_id',userposts.id).fetch()
-			console.log(usercommentswrapper)
-			let usercomments = userpostswrapper.value()
-			
-			for(let j=0; j<usercomments.length;j++){
-					console.log('hi')
-
-					//yield usercomments[j].delete()
+			for (let i =0; i<userposts.length;i++){
+				let usercommentswrapper = yield Comment.query().where('user_id',userposts.id).fetch()
+				let usercomments = userpostswrapper.value()
+				for(let j=0; j<usercomments.length;j++){
+					yield usercomments[j].delete()
 				}
-				//yield userposts.delete()
-				response.status(201)
+				yield userposts[i].delete()
+				
 			}
-			//yield reqdUser.delete()
-
-			
-			
-		/*} else {
+			yield reqdUser.delete()
+		} else {
 			response.status(403).send("Only admins are allowed to delete class")
-		}*/
+		}
 
 
 	}
