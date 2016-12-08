@@ -17,10 +17,11 @@ class UserController {
 		let userID = request.param('id')
 		let data = request.all()
 		if(user.admin==true){
+			console.log('hi')
 			let reqdUser = yield User.findBy('id',userID)
 			yield reqdUser.delete()
 			//let post = yield Post.query.where('user_id',userID)
-			console.log('hi')
+			
 			//consloe.log(post)
 			//console.log(post.id)
 			//let commentsWrapper = yield Comment.query().where('post_id',post.id).fetch();
