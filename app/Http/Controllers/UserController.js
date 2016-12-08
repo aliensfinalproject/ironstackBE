@@ -35,6 +35,7 @@ class UserController {
 				
 			}
 			yield reqdUser.delete()
+			response.status(203).json({success: "User deleted successfully."});
 		} else {
 			response.status(403).send("Only admins are allowed to delete class")
 		}
