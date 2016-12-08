@@ -22,7 +22,6 @@ class UserController {
 			let posts = yield Post.query().where('user_id',userID)
 			console.log(reqdUser)
 			console.log(posts)
-			let 
 			//yield reqdUser.delete()
 			
 			response.status(201)
