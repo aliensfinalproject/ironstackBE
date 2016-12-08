@@ -20,10 +20,13 @@ class UserController {
 		let data = request.all()
 		if(user.admin==true){
 			let reqdUser = yield User.findBy('id',userID)
-			let userposts = yield Post.query().where('user_id',userID).fetch()
+			let userpostswrapper = yield Post.query().where('user_id',userID).fetch()
+			let userposts = userpostswrapper.value()
 			console.log(userposts)
 			for(let i=0; i<userposts.length;i++){
-				let usercomments = yield Comment.where('user_id',userID).fetch()
+				let usercommentswrapper = yield Comment.where('user_id',userID).fetch()
+				console.log(usercommentswrapper)
+				let usercomments = userpostswrapper.value()
 				console.log(usercomments)
 				for(let j=0; j<usercomments.length;j++){
 					yield usercomments[j].delete()
