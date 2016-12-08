@@ -23,8 +23,9 @@ class UserController {
 			let userpostswrapper = yield Post.query().where('user_id',userID).fetch()
 			let userposts = userpostswrapper.value()
 			let usercommentswrapper = yield Comment.query().where('user_id',userID).fetch()
+			console.log(usercommentswrapper)
 			let usercomments = userpostswrapper.value()
-			console.log(usercomments)
+			
 			for(let j=0; j<usercomments.length;j++){
 					console.log('hi')
 
