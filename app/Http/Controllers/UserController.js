@@ -15,18 +15,13 @@ class UserController {
 	* deleteUser(request,response){
 		let user = request.authUser
 		let userID = request.param('id')
+		console.log('this is a test')
 		let data = request.all()
 		if(user.admin==true){
 			console.log('hi')
 			let reqdUser = yield User.findBy('id',userID)
 			yield reqdUser.delete()
-			//let post = yield Post.query.where('user_id',userID)
 			
-			//consloe.log(post)
-			//console.log(post.id)
-			//let commentsWrapper = yield Comment.query().where('post_id',post.id).fetch();
-
-			//yield removeUser.delete()
 			response.status(201)
 		} else {
 			response.status(403).send("Only admins are allowed to delete class")
