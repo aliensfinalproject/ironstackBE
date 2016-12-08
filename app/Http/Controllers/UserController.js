@@ -22,19 +22,17 @@ class UserController {
 			let reqdUser = yield User.findBy('id',userID)
 			let userpostswrapper = yield Post.query().where('user_id',userID).fetch()
 			let userposts = userpostswrapper.value()
-			for(let i=0; i<userposts.length;i++){
-				let usercommentswrapper = yield Comment.query().where('user_id',userID).fetch()
-				
-				let usercomments = userpostswrapper.value()
-				console.log(usercomments)
-				for(let j=0; j<usercomments.length;j++){
+			let usercommentswrapper = yield Comment.query().where('user_id',userID).fetch()
+			let usercomments = userpostswrapper.value()
+			console.log(usercomments)
+			for(let j=0; j<usercomments.length;j++){
 					console.log('hi')
 
-					yield usercomments[j].delete()
+					//yield usercomments[j].delete()
 				}
-				yield userposts.delete()
+				//yield userposts.delete()
 			}
-			yield reqdUser.delete()
+			//yield reqdUser.delete()
 
 			
 			response.status(201)
