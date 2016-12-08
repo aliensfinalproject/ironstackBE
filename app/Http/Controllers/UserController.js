@@ -1,5 +1,6 @@
 'use strict'
 const User = use("App/Model/User")
+const Post = use("App/Model/Post")
 const Classe = use("App/Model/Classe")
 const Hash = use('Hash')
 
@@ -15,12 +16,14 @@ class UserController {
 	* deleteUser(request,response){
 		let user = request.authUser
 		let userID = request.param('id')
-		console.log('this is a test')
 		let data = request.all()
 		if(user.admin==true){
-			console.log('hi')
 			let reqdUser = yield User.findBy('id',userID)
-			yield reqdUser.delete()
+			let posts = yield Post.query().where('user_id',userID)
+			console.log(reqdUser)
+			console.log(posts)
+			let 
+			//yield reqdUser.delete()
 			
 			response.status(201)
 		} else {
