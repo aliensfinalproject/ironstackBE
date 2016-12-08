@@ -22,7 +22,7 @@ class UserController {
 			let reqdUser = yield User.findBy('id',userID)
 			let userpostswrapper = yield Post.query().where('user_id',userID).fetch()
 			let userposts = userpostswrapper.value()
-			let usercommentswrapper = yield Comment.query().where('user_id',userID).fetch()
+			let usercommentswrapper = yield Comment.query().where('user_id',userposts.id).fetch()
 			console.log(usercommentswrapper)
 			let usercomments = userpostswrapper.value()
 			
