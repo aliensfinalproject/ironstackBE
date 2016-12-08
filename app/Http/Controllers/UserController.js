@@ -1,6 +1,7 @@
 'use strict'
 const User = use("App/Model/User")
 const Post = use("App/Model/Post")
+const Comment = use("App/Model/Comment")
 const Classe = use("App/Model/Classe")
 const Hash = use('Hash')
 
@@ -19,10 +20,18 @@ class UserController {
 		let data = request.all()
 		if(user.admin==true){
 			let reqdUser = yield User.findBy('id',userID)
-			let posts = yield Post.query().where('user_id',userID)
-			console.log('The reqd user is :'reqdUser)
-			console.log('Users posts are:'posts)
-			//yield reqdUser.delete()
+			let userposts = yield Post.query().where('user_id',userID).fetch()
+			console.log(userposts)
+			for(let i=0; i<userposts.length;i++){
+				let usercomments = yield Comment.where('user_id',userID).fetch()
+				console.log(usercomments)
+				for(let j=0; j<usercomments.length;j++){
+					yield usercomments[j].delete()
+				}
+				yield userposts.delete()
+			}
+			yield reqdUser.delete()
+
 			
 			response.status(201)
 		} else {
