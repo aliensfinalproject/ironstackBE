@@ -1,5 +1,6 @@
 'use strict'
 const Assignment = use("App/Model/Assignment")
+const Classe = use('App/Model/Classe')
 
 class AssignmentController {
 
@@ -17,11 +18,14 @@ class AssignmentController {
  }
 
  * index (request, response) {
-   let assignments = yield Assignment.query().where('enabled', true).fetch()
-   if (assignments) {
+   let classID = request.param('id')
+   let assignments = yield Assignment.query().where('enabled', true).andWhere('class_id', classID)
+   console.log("class id is: ", classID)
+   console.log("Assignments array: ", assignments)
+   if (assignments.length) {
      response.status(200).json(assignments)
    } else {
-     response.status(401).json({text: 'Assignment not enabled'})
+     response.status(401).json({text: 'No enabled assignments.'})
    }
 
  }

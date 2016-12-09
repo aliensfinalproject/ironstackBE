@@ -2,16 +2,18 @@
 const Post = use('App/Model/Post')
 const Classe = use('App/Model/Classe')
 const Comment = use('App/Model/Comment')
+const Assignment = use("App/Model/Assignment")
 
 class PostController {
 
    * create (request, response) {
        let user = request.authUser
-       let classId = request.param('id')
+      //  let classId = request.param('id')
+        let assignmentId = request.param('id')
        let data = request.only("title", "content","category")
        data.user_id = user.id
-       data.class_id = classId
-      // data.assignment_id = assignmentId
+       data.class_id = user.class_id
+      data.assignment_id = assignmentId
 
        let post = yield Post.create(data)
 
@@ -24,6 +26,11 @@ class PostController {
        response.status(200).json(posts)
  }
 
+  * indexAssignment (request, response) {
+     let assignmentID = request.param('id')
+     let posts = yield Post.query().where('assignment_id', assignmentID).orderBy('id','desc').fetch();
+     response.status(200).json(posts)
+}
   * read(request,response){
     let user = request.authUser
     let posts = yield Post.query().where('user_id',user.id).orderBy('id','desc').fetch();
@@ -67,7 +74,7 @@ class PostController {
          } else {
             response.status(401).json({text: "User not authorized to delete post."})
                 }
-  
+
     }
 
 

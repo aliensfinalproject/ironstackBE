@@ -47,8 +47,7 @@ Route.delete('post/:post_id/comments/:comment_id', 'CommentController.delete').m
 Route.delete('/comments/:id', 'CommentController.delete').middleware('auth')
 
 Route.post('/assignment', 'AssignmentController.create').middleware('auth')
-Route.get('/assignments', 'AssignmentController.index').middleware('auth')
 Route.get('/assignment/:id', 'AssignmentController.show').middleware('auth')
 Route.put('/assignment/:id', 'AssignmentController.update').middleware('auth')
 Route.delete('/assignment/:id', 'AssignmentController.delete').middleware('auth')
-
+Route.get('/:id/assignments', 'AssignmentController.index').middleware('auth')
