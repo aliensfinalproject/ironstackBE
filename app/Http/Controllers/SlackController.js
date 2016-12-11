@@ -8,22 +8,17 @@ class SlackController {
    * listener (request, response) {
    	console.log(request)
    	let slackrequest = request.only('token','user_name','text','trigger_word')
-   	let category = slackrequest.trigger_word == '#Question' ? 'question' : 'status'
-   	let data = {"title": slackrequest.text, "category": category, "user_id": 1, "class_id":3}
-   	let slackPost = yield Post.create(data)
-   	console.log(slackPost)
-
-      //  let user = request.authUser
-      //  let classId = request.param('id')
-      //  let data = request.only("title", "content","category")
-      //  data.user_id = user.id
-      //  data.class_id = classId
-      // // data.assignment_id = assignmentId
-
-      //  let post = yield Post.create(data)
-
-      //  response.status(201).json(post)
-      response.status(200).json({"text":"Post created."})
+   	if(slackrequest.token == 'u5YSLxGqxItuyHbP9LS6sFIj'){
+   		let category = slackrequest.trigger_word == '#Question' ? 'question' : 'status'
+	   	let postText = slackrequest.text.replace("#Question","")
+	   	let data = {"title": postText, "category": category, "user_id": 1, "class_id":3}
+	   	let slackPost = yield Post.create(data)
+	   	response.status(200).json({"text":"Post created."})
+   	} else {
+   		response.status(401).json('User not Authorized')
+   	}
+   	
+      
    }
 
 }
