@@ -53,3 +53,4 @@ Route.put('/assignment/:id', 'AssignmentController.update').middleware('auth')
 Route.delete('/assignment/:id', 'AssignmentController.delete').middleware('auth')
 
 Route.post('/slackInbound', 'SlackController.listener')
+Route.post('/slackuser','SlackController.slackConnect').middleware('auth')
