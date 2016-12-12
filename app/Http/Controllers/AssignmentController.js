@@ -19,7 +19,7 @@ class AssignmentController {
 
  * index (request, response) {
    let classID = request.param('id')
-   let assignments = yield Assignment.query().where('enabled', true).andWhere('class_id', classID)
+   let assignments = yield Assignment.query().where('enabled', true).andWhere('class_id', classID).orderBy('week','asc')
    console.log("class id is: ", classID)
    console.log("Assignments array: ", assignments)
    if (assignments.length) {
