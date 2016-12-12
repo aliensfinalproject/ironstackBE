@@ -6,6 +6,7 @@ class NoteController {
   * create (request, response) {
     let user = request.authUser
     let data = request.only('content')
+    console.log(data)
     data.user_id = user.id
     let note = yield Note.create(data)
 
