@@ -24,7 +24,7 @@ Route.post('/register','UserController.signUp')
 Route.post('/login','UserController.login')
 Route.get('/usermgmt','UserController.userlist').middleware('auth')
 Route.post('/usermgmt/addclass', 'UserController.updateClassId').middleware('auth')
-Route.post('/usermgmt/:id','UserController.update').middleware('auth')
+Route.put('/usermgmt/:id','UserController.update').middleware('auth')
 Route.delete('/users/delete/:id','UserController.deleteUser').middleware('auth')
 
 Route.get('/class','ClassController.read').middleware('auth')
@@ -51,3 +51,7 @@ Route.get('/assignment/:id', 'AssignmentController.show').middleware('auth')
 Route.put('/assignment/:id', 'AssignmentController.update').middleware('auth')
 Route.delete('/assignment/:id', 'AssignmentController.delete').middleware('auth')
 Route.get('/:id/assignments', 'AssignmentController.index').middleware('auth')
+
+
+Route.post('/slackInbound', 'SlackController.listener')
+Route.post('/slackuser','SlackController.slackConnect').middleware('auth')

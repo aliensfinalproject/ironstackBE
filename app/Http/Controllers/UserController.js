@@ -1,5 +1,7 @@
 'use strict'
 const User = use("App/Model/User")
+const Post = use("App/Model/Post")
+const Comment = use("App/Model/Comment")
 const Classe = use("App/Model/Classe")
 const Hash = use('Hash')
 
@@ -17,9 +19,23 @@ class UserController {
 		let userID = request.param('id')
 		let data = request.all()
 		if(user.admin==true){
-			let removeUser = yield User.findBy(userID,'id')
-			yield removeUser.delete()
-			response.status(201)
+			let reqdUser = yield User.findBy('id',userID)
+			let userpostswrapper = yield Post.query().where('user_id',userID).fetch()
+			let userposts = userpostswrapper.value()
+			console.log("the posts are: ", userposts)
+			console.log("the user posts wrapper: ", userpostswrapper)
+			for (let i =0; i<userposts.length;i++){
+				let usercommentswrapper = yield Comment.query().where('post_id',userposts[i].original.id).fetch()
+				let usercomments = usercommentswrapper.value()
+				console.log("the comments are: ", usercomments)
+				for(let j=0; j<usercomments.length;j++){
+					yield usercomments[j].delete()
+				}
+				yield userposts[i].delete()
+				
+			}
+			yield reqdUser.delete()
+			response.status(203).json({success: "User deleted successfully."});
 		} else {
 			response.status(403).send("Only admins are allowed to delete class")
 		}
