@@ -55,3 +55,7 @@ Route.get('/:id/assignments', 'AssignmentController.index').middleware('auth')
 
 Route.post('/slackInbound', 'SlackController.listener')
 Route.post('/slackuser','SlackController.slackConnect').middleware('auth')
+Route.get('/userProfile', 'SlackController.readProfile').middleware('auth')
+
+Route.post('userNote', 'NoteController.create').middleware('auth')
+Route.get('/userNotes', 'NoteController.read').middleware('auth')

@@ -23,14 +23,14 @@ class SlackController {
 		   }else{
 		   	response.status(400).json({'errorText':'SlackUser does not exits'})
 		   }
-	   	
+
 	   	} else {
 	   		response.status(401).json({'errorText':'User not Authorized'})
 	   	}
 
 
-   	
-      
+
+
    }
    * slackConnect(request,response){
 		let data = request.only('slackusername','image_url')
@@ -41,6 +41,11 @@ class SlackController {
 		response.status(201).json(slackprofile)
 
 	}
+
+  * readProfile (request, response) {
+    let profiles = yield UserProfile.all()
+		response.status(200).json(profiles)
+  }
 
 
 
