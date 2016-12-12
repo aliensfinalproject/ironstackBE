@@ -8,12 +8,11 @@ class PostController {
 
    * create (request, response) {
        let user = request.authUser
-      //  let classId = request.param('id')
         let assignmentId = request.param('id')
-       let data = request.only("title", "content","category")
+       let data = request.only("title", "content", "category", "assignment_id")
        data.user_id = user.id
-       data.class_id = user.class_id
-      data.assignment_id = assignmentId
+      //  data.class_id = user.class_id
+      data.class_id = assignmentId
 
        let post = yield Post.create(data)
 
