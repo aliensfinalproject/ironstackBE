@@ -19,11 +19,11 @@ class SlackController {
 		   	let slackPost = yield Post.create(data)
 		   	response.status(200).json({"text":"Post created."})
 		   }else{
-		   	response.status(400).json({'SlackUser does not exits'})
+		   	response.status(400).json({'errorText':'SlackUser does not exits'})
 		   }
 	   	
 	   	} else {
-	   		response.status(401).json({'User not Authorized'})
+	   		response.status(401).json({'errorText':'User not Authorized'})
 	   	}
 
 
