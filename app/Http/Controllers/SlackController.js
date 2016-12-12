@@ -3,6 +3,8 @@ const Post = use('App/Model/Post')
 const Classe = use('App/Model/Classe')
 const Comment = use('App/Model/Comment')
 const UserProfile = use('App/Model/UserProfile')
+const User = use('App/Model/User')
+
 
 class SlackController {
 
