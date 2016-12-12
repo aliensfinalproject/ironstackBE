@@ -19,7 +19,7 @@ class SlackController {
 	   		let user = yield User.findBy('id',userprofile.user_id)
 		   	let data = {"title": postText, "category": category, "user_id": user.id, "class_id":user.class_id}
 		   	let slackPost = yield Post.create(data)
-		   	response.status(200).json({"text":"Post created."})
+		   	response.status(200).json({"text":"Post created: <http://localhost:8081/#/class/postDetails/"+user.class_id+"/"+slackPost.id+">"})
 		   }else{
 		   	response.status(400).json({'errorText':'SlackUser does not exits'})
 		   }
