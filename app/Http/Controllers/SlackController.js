@@ -32,6 +32,7 @@ class SlackController {
    }
    * slackConnect(request,response){
 		let data = request.only('slackusername','image_url')
+		console.log(data)
 		let user = request.authUser
 		data.user_id = user.id
 		let slackprofile = yield UserProfile.create(data)
