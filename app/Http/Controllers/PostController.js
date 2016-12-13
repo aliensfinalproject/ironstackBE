@@ -25,9 +25,9 @@ class PostController {
        response.status(200).json(posts)
  }
 
-  * indexAssignment (request, response) {
+  * indexPostAssign (request, response) {
      let assignmentID = request.param('id')
-     let posts = yield Post.query().where('assignment_id', assignmentID).orderBy('id','desc').fetch();
+     let posts = yield Post.query().where('assignment_id', assignmentID).orderBy('id','desc');
      response.status(200).json(posts)
 }
   * read(request,response){
