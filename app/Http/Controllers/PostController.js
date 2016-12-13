@@ -26,9 +26,13 @@ class PostController {
  }
 
   * indexPostAssign (request, response) {
-     let assignmentID = request.param('id')
+     let assignmentID = request.param('assignment_id')
+     console.log('assign id is: ', assignmentID);
      let posts = yield Post.query().where('assignment_id', assignmentID).orderBy('id','desc');
-     response.status(200).json(posts)
+     let ids = posts.map(post => post.assignment_id);
+     console.log('assign ids are: ', ids);
+     if (posts.length) response.status(200).json(posts)
+     else response.status(404).json({ error: 'No posts found for assignment.' })
 }
   * read(request,response){
     let user = request.authUser
