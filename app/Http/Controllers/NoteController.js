@@ -15,7 +15,8 @@ class NoteController {
 
   * read (request, response) {
     let user = request.authUser
-    let notes = yield Note.findBy('user_id',user.id)
+    let notes = yield Note.query().where('user_id',user.id)
+    console.log(notes)
 		response.status(200).json(notes)
   }
   
