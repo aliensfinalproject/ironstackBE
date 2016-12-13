@@ -18,10 +18,11 @@ class SlackController {
 	   	let userprofile = yield UserProfile.findBy('slackusername',slackrequest.user_name)
 	   	if(userprofile){
 	   		let user = yield User.findBy('id',userprofile.user_id)
+	   		let data ={}
 	   		if(category === 'question'){
-	   			let data = {"title": postText, "category": category, "user_id": user.id, "class_id":user.class_id}
+	   			 data = {"title": postText, "category": category, "user_id": user.id, "class_id":user.class_id}
 	   		}else {
-	   			let data = {"content": postStatus, "category": category, "user_id": user.id, "class_id": user.class_id}
+	   			 data = {"content": postStatus, "category": category, "user_id": user.id, "class_id": user.class_id}
 	   		}
 		   	
 		   	let slackPost = yield Post.create(data)
