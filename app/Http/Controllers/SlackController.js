@@ -37,20 +37,27 @@ class SlackController {
 		console.log(data)
 		let user = request.authUser
 		data.user_id = user.id
-		let slackprofile = yield UserProfile.create(data)
-		response.status(201).json(slackprofile)
-
+		let slackprofile = yield UserProfile.findBy('user_id',user.id){
+			if(!slackprofile){
+				let slackprofile = yield UserProfile.create(data)
+				response.status(201).json(slackprofile)
+			} else {
+				slackprofile.slackusername = data.slackusername
+				slackprofile.image_url = data.image_url
+				yield slackprofile.save()
+				response.status(200).json(slackprofile)
+			}
+		}
+		
 	}
 
   * readProfile (request, response) {
   	let user = request.authUser
   	let profile = yield UserProfile.findBy('user_id',user.id)
 	response.status(200).json(profile)
-  }
+  	}
 
-
-
-
+ 
 
 }
 
