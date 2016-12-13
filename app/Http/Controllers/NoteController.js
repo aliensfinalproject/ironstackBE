@@ -14,9 +14,12 @@ class NoteController {
   }
 
   * read (request, response) {
-    let notes = yield Note.all()
+    let user = request.authUser
+    let notes = yield Note.findBy('user_id',user.id)
 		response.status(200).json(notes)
   }
+  
+
 
 }
 
