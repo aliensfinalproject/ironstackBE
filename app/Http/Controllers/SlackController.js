@@ -21,7 +21,7 @@ class SlackController {
 	   		if(category === 'question'){
 	   			let data = {"title": postText, "category": category, "user_id": user.id, "class_id":user.class_id}
 	   		}else {
-	   			let data = {"content": postStatus, "category": category, "user_id": usser.id, "class_id": user.class_id}
+	   			let data = {"content": postStatus, "category": category, "user_id": user.id, "class_id": user.class_id}
 	   		}
 		   	
 		   	let slackPost = yield Post.create(data)
