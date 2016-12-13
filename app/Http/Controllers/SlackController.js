@@ -43,8 +43,9 @@ class SlackController {
 	}
 
   * readProfile (request, response) {
-    let profiles = yield UserProfile.all()
-		response.status(200).json(profiles)
+  	let user = request.authUser
+  	let profile = yield UserProfile.findBy('user_id',user.id)
+	response.status(200).json(profile)
   }
 
 
